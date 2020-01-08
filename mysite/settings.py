@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+import dj_database_url 
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -25,7 +27,7 @@ SECRET_KEY = 'e93-sp$lh66@nij0(1vACQS363b8y8bhmdadj&+nfm@2qoovgbayx8g^b#)&op5k'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['shambaapp.herokuapp.com']
 
 
 # Application definition
@@ -50,6 +52,7 @@ INSTALLED_APPS = [
 
 
 MIDDLEWARE = [
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -84,11 +87,11 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'btredb',
-        'USER': 'postgres',
-        'PASSWORD': 'johnte2536',
-        'HOST':'localhost'
+        'ENGINE': 'django.db.backends.sqlite3',
+         'NAME': 'btredb',
+        # 'USER': 'postgres',
+        # 'PASSWORD': 'johnte2536',
+        # 'HOST':'localhost'
         }
 }
 
@@ -152,3 +155,9 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = 'ianmuhiajohn@gmail.com'
 EMAIL_HOST_PASSWORD = 'johnte2536'
 EMAIL_USE_TLS = True
+
+#  Add configuration for static files storage using whitenoise
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+
+prod_db  =  dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(prod_db)
