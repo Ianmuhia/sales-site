@@ -87,11 +87,11 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
          'NAME': 'btredb',
-        # 'USER': 'postgres',
-        # 'PASSWORD': 'johnte2536',
-        # 'HOST':'localhost'
+         'USER': 'postgres',
+         'PASSWORD': 'johnte2536',
+         'HOST':'localhost'
         }
 }
 
